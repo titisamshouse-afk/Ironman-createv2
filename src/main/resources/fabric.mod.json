@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "ironman",
+  "version": "${version}",
+  "name": "Iron Man",
+  "description": "Iron Man technology for Minecraft: Arc Reactor, suit controller, energy and flight prototype.",
+  "authors": ["RobbieNB1491"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {"main": ["com.ironman.main.IronmanMod"], "client": ["com.ironman.main.client.IronmanModClient"]},
+  "depends": {"fabricloader": ">=0.16.14", "minecraft": "~1.21.1", "java": ">=21", "fabric-api": "*"}
+}
