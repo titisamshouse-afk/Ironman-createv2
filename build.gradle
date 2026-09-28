@@ -31,8 +31,21 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach { options.release = 21 }
-java { sourceCompatibility = JavaVersion.VERSION_21; targetCompatibility = JavaVersion.VERSION_21; withSourcesJar() }
-jar { from("LICENSE") { rename { "${it}_${project.name}" } } }
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+jar {
+    archiveBaseName = "ironman"
+    from("LICENSE") { rename { "${it}_ironman" } }
+}
+
+tasks.register("releaseJar") {
+    dependsOn("build")
+    doLast { println("Iron Man release JARs are in build/libs/") }
+}
 
 publishing {
     publications { create("mavenJava", MavenPublication) { from components.java } }
