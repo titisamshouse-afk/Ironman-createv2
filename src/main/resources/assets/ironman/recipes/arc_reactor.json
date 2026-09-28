@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" D ","RGR"," D "],
+  "key": {
+    "D": {"item": "minecraft:diamond"},
+    "R": {"item": "minecraft:redstone_block"},
+    "G": {"item": "minecraft:gold_block"}
+  },
+  "result": {"id": "ironman:arc_reactor", "count": 1}
+}
