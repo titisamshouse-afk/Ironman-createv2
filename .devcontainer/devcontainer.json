@@ -1,0 +1,23 @@
+{
+  "name": "Iron Man Minecraft Mod",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/gradle:1": {
+      "version": "8.8"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.java",
+        "vscjava.vscode-gradle",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-test",
+        "github.vscode-pull-request-github"
+      ]
+    }
+  },
+  "postCreateCommand": "chmod +x gradlew 2>/dev/null || true; java -version; gradle --version",
+  "remoteUser": "vscode"
+}
