@@ -35,11 +35,11 @@ jobs:
 
       - name: Install Fabric API
         run: |
-          curl -L "https://api.modrinth.com/v2/project/P7dR8mSH/version/0.116.1%2B1.21.1/file" -o minecraft-test/mods/fabric-api.jar
+          curl -L "https://maven.fabricmc.net/net/fabricmc/fabric-api/0.116.1%2B1.21.1/fabric-api-0.116.1%2B1.21.1.jar" -o minecraft-test/mods/fabric-api.jar
 
       - name: Install Iron Man mod
         run: |
-          cp build/libs/ironman-*.jar minecraft-test/mods/ironman.jar
+          find build/libs -maxdepth 1 -type f -name "ironman-*.jar" ! -name "*-sources.jar" -print -quit | xargs -I{} cp "{}" minecraft-test/mods/ironman.jar
 
       - name: Accept Minecraft EULA
         run: echo "eula=true" > minecraft-test/eula.txt
