@@ -48,7 +48,11 @@ jobs:
       - name: Start test server
         working-directory: minecraft-test
         run: |
-          java -Xmx1G -Xms512M -jar fabric-server-launch.jar nogui > server.log 2>&1 &
+          echo "Contents of minecraft-test:"
+          ls -lah
+          test -s fabric-server-launch.jar
+          file fabric-server-launch.jar
+          java -Xmx1G -Xms512M -jar "$GITHUB_WORKSPACE/minecraft-test/fabric-server-launch.jar" nogui > server.log 2>&1 &
           echo $! > server.pid
 
           for i in {1..60}; do
