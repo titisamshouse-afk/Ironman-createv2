@@ -31,7 +31,7 @@ jobs:
       - name: Download Fabric server launcher
         run: |
           mkdir -p minecraft-test/mods
-          curl -fL --retry 3 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o minecraft-test/fabric-server-launch.jar\n
+          curl -fL --retry 5 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o minecraft-test/fabric-server-launch.jar\n
       - name: Install Fabric API
         run: |
           mkdir -p minecraft-test/mods
