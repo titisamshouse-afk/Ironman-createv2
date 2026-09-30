@@ -1,6 +1,5 @@
 package com.ironman.main.client;
 
-import com.ironman.main.IronmanPlayerData;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -9,7 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.DeltaTracker;
 import org.lwjgl.glfw.GLFW;
 
 public class IronmanModClient implements ClientModInitializer {
@@ -28,7 +27,7 @@ public class IronmanModClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(IronmanModClient::renderHud);
     }
 
-    private static void renderHud(GuiGraphics graphics, float tickDelta) {
+    private static void renderHud(GuiGraphics graphics, DeltaTracker tickDelta) {
         Minecraft client = Minecraft.getInstance();
         if (client.player == null) return;
 
@@ -40,7 +39,6 @@ public class IronmanModClient implements ClientModInitializer {
 
         if (!fullSuit) return;
 
-        // Client HUD reads the synced player abilities/state visually.
         int x = 10;
         int y = 10;
         graphics.drawString(client.font, "IRON MAN", x, y, 0xFFFFFF, true);
