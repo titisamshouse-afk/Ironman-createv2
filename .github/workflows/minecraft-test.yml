@@ -31,8 +31,10 @@ jobs:
       - name: Download Fabric server launcher
         run: |
           mkdir -p minecraft-test/mods
-          curl -fL --retry 5 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o minecraft-test/fabric-server-launch.jar\n
-      - name: Install Fabric API
+          curl -fL --retry 5 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o /tmp/fabric-server-launch.jar
+          mv /tmp/fabric-server-launch.jar minecraft-test/fabric-server-launch.jar
+          test -s minecraft-test/fabric-server-launch.jar
+          ls -lh minecraft-test/fabric-server-launch.jar
         run: |
           mkdir -p minecraft-test/mods
           find "$HOME/.gradle/caches/modules-2/files-2.1/net.fabricmc.fabric-api/fabric-api" -type f -name "fabric-api-*.jar" ! -name "*-sources.jar" -print -quit | xargs -r -I{} cp "{}" minecraft-test/mods/fabric-api.jar
