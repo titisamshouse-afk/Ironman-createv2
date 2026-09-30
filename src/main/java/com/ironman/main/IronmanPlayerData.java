@@ -49,7 +49,7 @@ public final class IronmanPlayerData {
                         player.getAbilities().mayfly = false;
                         player.onUpdateAbilities();
                     } else {
-                        player.level().sendParticles(ParticleTypes.FLAME,
+                        ((net.minecraft.server.level.ServerLevel) player.level()).sendParticles(ParticleTypes.FLAME,
                                 player.getX(), player.getY() + 0.15, player.getZ(),
                                 4, 0.22, 0.05, 0.22, 0.01);
                         if (player.tickCount % 20 == 0) {
