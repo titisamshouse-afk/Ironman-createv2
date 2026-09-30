@@ -31,12 +31,10 @@ jobs:
       - name: Download Fabric server launcher
         run: |
           mkdir -p minecraft-test/mods
-          curl -fL --retry 3 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o minecraft-test/fabric-server-launch.jar\n          unzip -t minecraft-test/fabric-server-launch.jar >/dev/null
-
+          curl -fL --retry 3 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o minecraft-test/fabric-server-launch.jar\n
       - name: Install Fabric API
         run: |
-          curl -fL --retry 3 --retry-all-errors "https://maven.fabricmc.net/net/fabricmc/fabric-api/0.116.1%2B1.21.1/fabric-api-0.116.1%2B1.21.1.jar" -o minecraft-test/mods/fabric-api.jar\n          unzip -t minecraft-test/mods/fabric-api.jar >/dev/null
-
+          curl -fL --retry 3 --retry-all-errors "https://maven.fabricmc.net/net/fabricmc/fabric-api/0.116.1%2B1.21.1/fabric-api-0.116.1%2B1.21.1.jar" -o minecraft-test/mods/fabric-api.jar\n
       - name: Install Iron Man mod
         run: |
           find build/libs -maxdepth 1 -type f -name "ironman-*.jar" ! -name "*-sources.jar" -print -quit | xargs -I{} cp "{}" minecraft-test/mods/ironman.jar
