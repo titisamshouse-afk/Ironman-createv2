@@ -35,14 +35,16 @@ jobs:
           mv /tmp/fabric-server-launch.jar minecraft-test/fabric-server-launch.jar
           test -s minecraft-test/fabric-server-launch.jar
           ls -lh minecraft-test/fabric-server-launch.jar
+
+      - name: Install Fabric API
         run: |
-          mkdir -p minecraft-test/mods
           find "$HOME/.gradle/caches/modules-2/files-2.1/net.fabricmc.fabric-api/fabric-api" -type f -name "fabric-api-*.jar" ! -name "*-sources.jar" -print -quit | xargs -r -I{} cp "{}" minecraft-test/mods/fabric-api.jar
           test -s minecraft-test/mods/fabric-api.jar
 
       - name: Install Iron Man mod
         run: |
           find build/libs -maxdepth 1 -type f -name "ironman-*.jar" ! -name "*-sources.jar" -print -quit | xargs -I{} cp "{}" minecraft-test/mods/ironman.jar
+          test -s minecraft-test/mods/ironman.jar
 
       - name: Accept Minecraft EULA
         run: echo "eula=true" > minecraft-test/eula.txt
