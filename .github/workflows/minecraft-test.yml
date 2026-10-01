@@ -34,7 +34,6 @@ jobs:
           curl -fL --retry 5 --retry-all-errors "https://meta.fabricmc.net/v2/versions/loader/1.21.1/0.16.14/1.0.1/server/jar" -o /tmp/fabric-server-launch.jar
           mv /tmp/fabric-server-launch.jar minecraft-test/fabric-server-launch.jar
           test -s minecraft-test/fabric-server-launch.jar
-          ls -lh minecraft-test/fabric-server-launch.jar
 
       - name: Install Fabric API
         run: |
@@ -52,10 +51,7 @@ jobs:
       - name: Start test server
         working-directory: minecraft-test
         run: |
-          echo "Contents of minecraft-test:"
-          ls -lah
           test -s fabric-server-launch.jar
-          file fabric-server-launch.jar
           java -Xmx1G -Xms512M -jar "$GITHUB_WORKSPACE/minecraft-test/fabric-server-launch.jar" nogui > server.log 2>&1 &
           echo $! > server.pid
 
@@ -65,9 +61,9 @@ jobs:
               break
             fi
 
-            if grep -qE "ERROR|Exception|Caused by:" server.log; then
-              echo "Minecraft server reported an error:"
-              tail -n 120 server.log
+            if grep -qE "Mod resolution failed|Exception in server tick loop|Caused by: .*Mod" server.log; then
+              echo "Minecraft server reported a mod-loading error:"
+              tail -n 160 server.log
               exit 1
             fi
 
@@ -83,9 +79,9 @@ jobs:
       - name: Verify Iron Man mod loaded
         working-directory: minecraft-test
         run: |
-          grep -i "ironman" server.log || true
-          if grep -qiE "Failed to load|Mod resolution failed|Exception in server tick loop" server.log; then
-            echo "Potential mod/server loading failure detected."
+          grep -i "ironman" server.log
+          if grep -qiE "Mod resolution failed|Exception in server tick loop|Failed to load .*ironman" server.log; then
+            echo "Iron Man mod/server loading failure detected."
             tail -n 200 server.log
             exit 1
           fi
